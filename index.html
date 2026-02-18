@@ -6,36 +6,116 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style.css">
-    <title>Portfolio Website</title>
+    <title>Princewill - ML Engineer Portfolio</title>
 </head>
 <body>
+    <!-- Overlay for mobile menu -->
+    <div class="overlay" id="overlay"></div>
+
     <header>
         <a href="#" class="logo">PRINCEWILL</a>
 
-        <nav>
-            <a href="#" class="active"> Home</a>
-            <a href="#" >Projects</a>
-            <a href="#" >Skills</a>
-            <a href="#" >Education</a>
-            <a href="#" >Experience</a>
-            <a href="#" >Contact</a>
+        <!-- Hamburger menu icon -->
+        <div class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </div>
+
+        <nav id="nav-menu">
+            <!-- Close button for mobile -->
+            <div class="close-menu" id="close-menu">
+                <i class="fas fa-times"></i>
+            </div>
+            <a href="#" class="active">Home</a>
+            <a href="#">Projects</a>
+            <a href="#">Skills</a>
+            <a href="#">Education</a>
+            <a href="#">Experience</a>
+            <a href="#">Contact</a>
         </nav>
     </header>
+
     <section class="home">
         <div class="home-img">
-            <img src="RICH_ME.jpeg" alt="">
+            <img src="RICH_ME.jpeg" alt="Princewill - ML Engineer">
         </div>
         <div class="home-content">
             <h1>Hi, It's <span>Princewill</span></h1>
             <h3 class="typing-text">I'm a <span></span></h3>
-            <p> A  <span>Data Scientist</span> and  <span>Machine Learning </span>Engineer focused on transforming raw <span class="word"> data</span> into scalable, production-ready systems. I engineer intelligent solutions from <span class="word">data</span> to  <span class="word">Deployment</span>, combining <span >Machine Learning </span> expertise with <span class="word">Web</span> and <span class="word"> Mobile </span>engineering to ensure models become <span> real-world applications</span>.</p>
+            <p>A <span>Data Scientist</span> and <span>Machine Learning</span> Engineer focused on transforming raw <span class="word">data</span> into scalable, production-ready systems. I engineer intelligent solutions from <span class="word">data</span> to <span class="word">Deployment</span>, combining <span>Machine Learning</span> expertise with <span class="word">Web</span> and <span class="word">Mobile</span> engineering to ensure models become <span>real-world applications</span>.</p>
             <div class="social-icons">
-                <a href="https://www.linkedin.com/in/mukete-princewill-a514a4349/"><i class="fa-brands fa-linkedin"></i></a>
-                <a href="https://github.com/77PRINCE"><i class="fa-brands fa-github"></i></a>
-                <a href="https://x.com/Princewill_yome"><i class="fa-brands fa-x-twitter"></i></a>
+                <a href="https://www.linkedin.com/in/mukete-princewill-a514a4349/" target="_blank"><i class="fa-brands fa-linkedin"></i></a>
+                <a href="https://github.com/77PRINCE" target="_blank"><i class="fa-brands fa-github"></i></a>
+                <a href="https://x.com/Princewill_yome" target="_blank"><i class="fa-brands fa-x-twitter"></i></a>
             </div>
             <a href="#" class="btn">Hire me</a>
         </div>
     </section>
+
+    <!-- Add JavaScript for hamburger menu functionality -->
+    <script>
+        // Get elements
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('nav-menu');
+        const closeMenu = document.getElementById('close-menu');
+        const overlay = document.getElementById('overlay');
+        const navLinks = document.querySelectorAll('nav a');
+
+        // Function to open menu
+        function openMenu() {
+            navMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
+        }
+
+        // Function to close menu
+        function closeMenuFunc() {
+            navMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = ''; // Restore scrolling
+        }
+
+        // Event listeners
+        hamburger.addEventListener('click', openMenu);
+        closeMenu.addEventListener('click', closeMenuFunc);
+        overlay.addEventListener('click', closeMenuFunc);
+
+        // Close menu when clicking on a nav link (for mobile)
+        navLinks.forEach(link => {
+            link.addEventListener('click', (e) => {
+                // Remove active class from all links
+                navLinks.forEach(l => l.classList.remove('active'));
+                // Add active class to clicked link
+                e.target.classList.add('active');
+                // Close menu on mobile after clicking
+                if (window.innerWidth <= 995) {
+                    closeMenuFunc();
+                }
+            });
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 995) {
+                // Ensure menu is visible on desktop
+                navMenu.classList.remove('active');
+                overlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // Optional: Add smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>

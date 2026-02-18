@@ -49,6 +49,7 @@ header{
     transform: scale(1.1);
 }
 
+/* Desktop navigation styles */
 nav a{
     font-size: 1.8rem;
     color: white;
@@ -62,39 +63,6 @@ nav a:hover,
 nav a.active{
     color: #b74b4b;
     border-bottom: 3px solid #b74b4b;
-}
-
-@media(max-width:995px){
-    nav{
-        position: absolute;
-        display: none;
-        top: 0;
-        right: 0;
-        width: 40%;
-        border-left: 3px solid #b74b4b;
-        border-bottom: 3px solid #b74b4b;
-        border-bottom-left-radius: 2rem;
-        padding: 1rem solid;
-        background-color: #161616;
-        border-top: 0.1rem solid rgba(0,0,0,0.1);
-    }
-
-    nav.active{
-        display: block;
-    }
-
-    nav a{
-        display: block;
-        font-size: 2rem;
-        margin: 3rem 0;
-    }
-
-    nav a:hover,
-    nav a.active{
-        padding: 1rem;
-        border-radius: 0.5rem;
-        border-bottom: 0.5rem solid #b74b4b;
-    }
 }
 
 section{
@@ -250,7 +218,107 @@ span{
     }
 }
 
+/* ===== NAVIGATION FIXES - ONLY MODIFYING THIS SECTION ===== */
+
+/* Hide close menu by default */
+.close-menu {
+    display: none;
+}
+
+/* Hamburger menu styles */
+.hamburger {
+    display: none;
+    font-size: 3rem;
+    color: #b74b4b;
+    cursor: pointer;
+    transition: 0.3s ease;
+    z-index: 101;
+}
+
+.hamburger:hover {
+    transform: scale(1.1);
+}
+
+/* Overlay for mobile menu */
+.overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 99;
+    backdrop-filter: blur(3px);
+}
+
+.overlay.active {
+    display: block;
+}
+
+/* Mobile Styles - Only applied when screen width is 995px or less */
 @media(max-width:995px){
+    /* Show hamburger on mobile */
+    .hamburger {
+        display: block;
+    }
+
+    /* Show close button only on mobile */
+    .close-menu {
+        display: block;
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 3rem;
+        color: #b74b4b;
+        cursor: pointer;
+        z-index: 102;
+    }
+
+    /* Override existing mobile nav styles */
+    nav {
+        position: fixed !important;
+        display: block !important;
+        top: 0;
+        right: -100%;
+        width: 70%;
+        max-width: 400px;
+        height: 100vh;
+        background-color: #161616;
+        border-left: 3px solid #b74b4b;
+        padding: 8rem 2rem 2rem;
+        transition: 0.3s ease-in-out;
+        z-index: 100;
+        box-shadow: -5px 0 25px rgba(183, 75, 75, 0.3);
+    }
+
+    /* Show navigation when active class is added */
+    nav.active {
+        right: 0;
+    }
+
+    /* Style navigation links for mobile */
+    nav a {
+        display: block;
+        font-size: 2.2rem;
+        margin: 3rem 0;
+        text-align: center;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        transition: 0.3s ease;
+        border-bottom: none;
+    }
+
+    nav a:hover,
+    nav a.active {
+        background-color: #b74b4b;
+        color: black;
+        padding: 1rem;
+        border-radius: 0.5rem;
+        border-bottom: none;
+    }
+
+    /* Keep existing home section mobile styles */
     .home{
         flex-direction: column;
         margin: 5rem 4rem;
@@ -268,4 +336,77 @@ span{
         width: 70vw;
         margin-top: 4rem;
     }
+}
+
+/* Desktop Styles - Only applied when screen width is greater than 995px */
+@media(min-width:996px){
+    /* Hide hamburger and close button on desktop */
+    .hamburger,
+    .close-menu,
+    .overlay {
+        display: none !important;
+    }
+
+    /* Restore desktop navigation styles */
+    nav {
+        display: flex !important;
+        position: static;
+        width: auto;
+        height: auto;
+        background-color: transparent;
+        border: none;
+        padding: 0;
+        box-shadow: none;
+    }
+
+    nav a {
+        display: inline-block;
+        font-size: 1.8rem;
+        color: white;
+        margin-left: 4rem;
+        font-weight: 500;
+        transition: 0.3s ease;
+        border-bottom: 3px solid transparent;
+        padding: 0;
+    }
+
+    nav a:hover,
+    nav a.active {
+        color: #b74b4b;
+        border-bottom: 3px solid #b74b4b;
+        background-color: transparent;
+    }
+}
+
+/* Additional mobile optimizations - keeping existing styles */
+@media(max-width:480px){
+    html {
+        font-size: 55%;
+    }
+
+    .logo {
+        font-size: 2.5rem;
+    }
+
+    nav {
+        width: 85%;
+    }
+
+    .home-content h1 {
+        font-size: 4rem;
+    }
+
+    .home-content p {
+        font-size: 1.4rem;
+    }
+
+    .typing-text {
+        font-size: 2.4rem;
+    }
+}
+
+/* Remove the old conflicting media query for nav */
+@media(max-width:995px){
+    /* This section is now empty to prevent conflicts with the new styles */
+    /* The old nav styles have been completely replaced */
 }
