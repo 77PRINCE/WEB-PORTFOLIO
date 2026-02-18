@@ -13,7 +13,7 @@
     <div class="overlay" id="overlay"></div>
 
     <header>
-        <a href="#" class="logo">PRINCEWILL</a>
+        <a href="#" class="logo"> PRINCEWILL</a>
 
         <!-- Hamburger menu icon -->
         <div class="hamburger" id="hamburger">
@@ -39,7 +39,7 @@
             <img src="RICH_ME.jpeg" alt="Princewill - ML Engineer">
         </div>
         <div class="home-content">
-            <h1>Hi, It's <span>Princewill</span></h1>
+            <h1>Hi, It's <span>MUKETE Princewill</span></h1>
             <h3 class="typing-text">I'm a <span></span></h3>
            <p>
 A Computer Engineering student building strong foundations in <span>Python</span> and <span>Machine Learning</span>, focused on transforming raw <span class="word">data</span> into practical intelligent systems. I develop and experiment with ML models and explore how they integrate into <span class="word">backend</span> services for <span class="word">Web</span> and <span class="word">Mobile</span> applications. My goal is to grow into an engineer capable of taking solutions from <span class="word">data</span> to <span class="word">deployment</span> in real-world environments.
@@ -53,9 +53,59 @@ A Computer Engineering student building strong foundations in <span>Python</span
             <a href="#" class="btn">Hire me</a>
         </div>
     </section>
+    <section class="features">
+    <h2 class="features-title">What I'm Focused On</h2>
+
+    <div class="features-container">
+
+        <div class="feature-box reveal">
+            <h3>Machine Learning Foundations</h3>
+            <p>
+                Building strong foundations in Python, data preprocessing, and model development.
+                Focused on understanding how intelligent systems are designed and applied to real-world problems.
+            </p>
+        </div>
+
+        <div class="feature-box reveal">
+            <h3>Backend & Deployment</h3>
+            <p>
+                Exploring how machine learning models integrate into backend services and APIs
+                to support scalable web and mobile applications.
+            </p>
+        </div>
+
+        <div class="feature-box reveal">
+            <h3>Hackathon Builder</h3>
+            <p>
+                Actively participating in hackathons and personal projects, building functional
+                prototypes and strengthening real-world problem-solving skills.
+            </p>
+        </div>
+
+    </div>
+</section>
+
 
     <!-- Add JavaScript for hamburger menu functionality -->
     <script>
+        //for the secon section
+         const reveals = document.querySelectorAll('.reveal');
+
+    function revealOnScroll() {
+        reveals.forEach((el) => {
+            const windowHeight = window.innerHeight;
+            const revealTop = el.getBoundingClientRect().top;
+            const revealPoint = 100;
+
+            if (revealTop < windowHeight - revealPoint) {
+                el.classList.add('active');
+            }
+        });
+    }
+
+    window.addEventListener('scroll', revealOnScroll);
+    window.addEventListener('load', revealOnScroll);
+        //end of second section
         // Get elements
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
@@ -121,7 +171,7 @@ A Computer Engineering student building strong foundations in <span>Python</span
         });
     </script>
     <footer>
-    <p>© 2026 Mukete Princewill. All rights reserved.</p>
+    <p>© 2026 <a href="https://web-portfolio-gamma-self.vercel.app/">Mukete Princewill</a>. All rights reserved.</p>
 </footer>
 
 </body>
