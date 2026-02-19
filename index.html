@@ -108,57 +108,78 @@ A Computer Engineering student building strong foundations in <span>Python</span
     window.addEventListener('scroll', revealOnScroll);
     window.addEventListener('load', revealOnScroll);
         //end of second section
-        // Get elements
+        // ===== HAMBURGER MENU FUNCTIONALITY =====
+        // Get DOM elements
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('nav-menu');
         const closeMenu = document.getElementById('close-menu');
         const overlay = document.getElementById('overlay');
         const navLinks = document.querySelectorAll('nav a');
 
-        // Function to open menu
+        /**
+         * Opens the mobile navigation menu
+         * Adds transition classes to hamburger -> X transformation
+         * Prevents body scrolling when menu is open
+         */
         function openMenu() {
             navMenu.classList.add('active');
             overlay.classList.add('active');
+            hamburger.classList.add('active'); // Transform hamburger to X
             document.body.style.overflow = 'hidden'; // Prevent scrolling when menu is open
         }
 
-        // Function to close menu
+        /**
+         * Closes the mobile navigation menu
+         * Removes transition classes to X -> hamburger transformation
+         * Restores body scrolling
+         */
         function closeMenuFunc() {
             navMenu.classList.remove('active');
             overlay.classList.remove('active');
+            hamburger.classList.remove('active'); // Transform X back to hamburger
             document.body.style.overflow = ''; // Restore scrolling
         }
 
-        // Event listeners
+        // ===== EVENT LISTENERS =====
+        // Hamburger button click - opens menu and transforms to X
         hamburger.addEventListener('click', openMenu);
+        
+        // Close menu button (X) click - closes menu and transforms back to hamburger
         closeMenu.addEventListener('click', closeMenuFunc);
+        
+        // Overlay click - closes menu when clicking outside
         overlay.addEventListener('click', closeMenuFunc);
 
-        // Close menu when clicking on a nav link (for mobile)
+        // ===== NAVIGATION LINK INTERACTIONS =====
+        // Close menu when clicking on a nav link (for mobile devices)
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 // Remove active class from all links
                 navLinks.forEach(l => l.classList.remove('active'));
                 // Add active class to clicked link
                 e.target.classList.add('active');
-                // Close menu on mobile after clicking
+                // Close menu on mobile after clicking a link
                 if (window.innerWidth <= 995) {
                     closeMenuFunc();
                 }
             });
         });
 
-        // Handle window resize
+        // ===== RESPONSIVE BEHAVIOR =====
+        // Handle window resize - ensure proper state on screen size change
         window.addEventListener('resize', () => {
             if (window.innerWidth > 995) {
-                // Ensure menu is visible on desktop
+                // Reset menu state on desktop screens
                 navMenu.classList.remove('active');
                 overlay.classList.remove('active');
+                hamburger.classList.remove('active'); // Reset hamburger to original state
                 document.body.style.overflow = '';
             }
         });
 
-        // Optional: Add smooth scrolling for anchor links
+        // ===== SMOOTH SCROLLING FOR ANCHOR LINKS =====
+        // Enables smooth scroll behavior for all internal anchor links
+        // Prevents default jump behavior and animates scroll instead
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();

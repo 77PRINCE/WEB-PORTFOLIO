@@ -233,26 +233,75 @@ footer {
 
 /* ===== NAVIGATION FIXES - ONLY MODIFYING THIS SECTION ===== */
 
-/* Hide close menu by default */
+/* ===== CLOSE MENU BUTTON (X) - COMPLEMENTARY TRANSITION ===== */
+/**
+ * Close Menu Button:
+ * - Hidden by default on all screen sizes
+ * - Appears as the X button when hamburger menu opens
+ * - Positioned absolutely in top-right corner
+ * - Same styling as hamburger for visual consistency
+ */
+/**
+ * Close Menu Button (X Icon):
+ * - Hidden by default on all screen sizes
+ * - Appears as the X button when hamburger menu opens
+ * - Positioned absolutely at top-right inside the mobile menu
+ * - Replaces the hamburger button visually with rotation animation
+ */
 .close-menu {
-    display: none;
+    position: absolute;
+    top: 3rem;
+    right: 2rem;
+    font-size: 4rem;
+    color: #b74b4b;
+    cursor: pointer;
+    z-index: 102;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(0.8) rotate(-180deg);
 }
 
-/* Hamburger menu styles */
+/* ===== HAMBURGER MENU - ICON TRANSITION ===== */
+/**
+ * Hamburger Button:
+ * - Displays as three horizontal bars on mobile
+ * - Transforms to X icon with smooth 180-degree rotation when menu opens
+ * - Smooth transition between states
+ */
 .hamburger {
-    display: none;
+    display: flex;
     font-size: 3rem;
     color: #b74b4b;
     cursor: pointer;
-    transition: 0.3s ease;
     z-index: 101;
+    transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    transform: rotate(0deg);
 }
 
 .hamburger:hover {
-    transform: scale(1.1);
+    transform: rotate(0deg) scale(1.1);
 }
 
-/* Overlay for mobile menu */
+/**
+ * Active state: Hamburger icon rotates 180 degrees
+ * The rotation creates the visual effect of transforming to an X
+ */
+.hamburger.active {
+    transform: rotate(180deg) scale(1);
+    color: #b74b4b;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* ===== OVERLAY - DARKENS BACKGROUND WHEN MENU OPENS ===== */
+/**
+ * Overlay:
+ * - Semi-transparent dark background (70% black opacity)
+ * - Shows when mobile menu opens
+ * - Provides visual feedback and click-to-close target
+ * - Smooth fade in/out transition
+ */
 .overlay {
     display: none;
     position: fixed;
@@ -263,10 +312,16 @@ footer {
     background: rgba(0, 0, 0, 0.7);
     z-index: 99;
     backdrop-filter: blur(3px);
+    opacity: 0;
+    transition: opacity 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
+/**
+ * Overlay active state - fully visible when menu opens
+ */
 .overlay.active {
     display: block;
+    opacity: 1;
 }
 
 /* Mobile Styles - Only applied when screen width is 995px or less */
@@ -276,16 +331,26 @@ footer {
         display: block;
     }
 
-    /* Show close button only on mobile */
-    .close-menu {
-        display: block;
-        position: absolute;
-        top: 2rem;
-        right: 2rem;
-        font-size: 3rem;
-        color: #b74b4b;
-        cursor: pointer;
-        z-index: 102;
+    /**
+     * Close button visible on mobile with smooth fade-in and scale animation
+     * Appears when menu opens (nav.active state)
+     * Uses child selector because .close-menu is inside nav element
+     */
+    nav.active .close-menu {
+        opacity: 1;
+         z-index: 101;
+        visibility: visible;
+        transform: scale(1) rotate(0deg);
+    }
+
+    /**
+     * Close button hover effect - scales up slightly for better UX
+     * Brightens the color on hover for visual feedback
+     */
+    nav.active .close-menu:hover {
+        transform: scale(1.1) rotate(0deg);
+        color: #d16a6a;
+        filter: drop-shadow(0 0 10px #b74b4b);
     }
 
     /* Override existing mobile nav styles */
@@ -504,6 +569,9 @@ footer {
         linear-gradient(#000 0 0) content-box,
         linear-gradient(#000 0 0);
     -webkit-mask-composite: xor;
+    mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
     mask-composite: exclude;
 }
 
