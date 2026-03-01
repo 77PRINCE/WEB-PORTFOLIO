@@ -121,7 +121,7 @@ span{
      border: 3rem solid #b74b4b;
          box-shadow: 0 0 25px #b74b4b;
          
-         
+
 }
 
 .home-img img:hover{
@@ -569,23 +569,22 @@ footer {
 }
 
 /* Subtle animated border */
+/* Animated gradient border effect */
 .feature-box::before {
     content: "";
     position: absolute;
-    inset: -1px;
+    inset: -2px;
     border-radius: 12px;
-    padding: 1px;
-    background: linear-gradient(120deg, #1f1f1f, #2a2a2a, #1f1f1f);
-    background-size: 200% 200%;
+    background: linear-gradient(120deg, #cc5f5f, #db2626, #7e0909, #cc5f5f);
+    background-size: 300% 300%;
     animation: borderMove 6s linear infinite;
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite: xor;
-    mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    mask-composite: exclude;
+    z-index: -1;
+}
+
+/* Ensure content appears above the border */
+.feature-box {
+    position: relative;
+    background: #111;
 }
 
 @keyframes borderMove {
